@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Alert,
-  TextInput
-} from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-export default class foodcode extends Component {
+export default class Home extends Component {
 
   constructor(props) {
     super(props);
   }
 
-  _onPressSearch(){
-      Alert.alert("Presionaste el boton");
-  }
+  // _onPressSearch(){
+  //     Alert.alert("Presionaste el boton");
+  // }
+
+  static navigationOptions = {
+    title: 'Inicio',
+  };
 
   render() {
+
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <Text style={{fontWeight: 'bold'}}>Producto:</Text>
@@ -27,7 +27,8 @@ export default class foodcode extends Component {
           style={{width: 250, borderColor: 'gray', borderWidth: 0}}
         />
         <Button
-          onPress= {this._onPressSearch}
+          //onPress= {this._onPressSearch}
+          onPress={() => navigate('Product')}
           title="Buscar"
           color="#841584"
         />
@@ -36,23 +37,33 @@ export default class foodcode extends Component {
   }
 }
 
+class Product extends Component {
+  static navigationOptions = {
+    title: 'Product',
+  };
+  render() {
+    return (
+      <View>
+        <Text>Test foodcode</Text>
+      </View>
+    );
+  }
+}
+
+
+const foodcode = StackNavigator({
+  Home: { screen: Home },
+  Product: { screen: Product },
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
+
 
 AppRegistry.registerComponent('foodcode', () => foodcode);
